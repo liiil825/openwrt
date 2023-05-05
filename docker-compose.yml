@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  openwrt:
+    container_name: openwrt
+    image: openwrt_in_qemu
+    command: /sbin/init
+    privileged: true
+    restart: no
+    networks:
+      - macnet
+
+networks:
+  macnet:
+    driver: macvlan
+    driver_opts:
+      parent: wlp0s20f0u10
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
